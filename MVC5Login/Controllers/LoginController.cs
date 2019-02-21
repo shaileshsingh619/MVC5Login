@@ -36,6 +36,25 @@ namespace MVC5Login.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult Register(User userModel)
+        {
+            try
+            {
+                using (LoginEntities db = new LoginEntities())
+                {
+                    db.Users.Add(userModel);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return RedirectToAction("Index", "Login");
+        }
+
         public ActionResult LogOut()
         {
             int userId = (int)Session["userID"];
